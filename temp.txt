@@ -1,3 +1,13 @@
+curl http://localhost:11434/api/tags -d "options": {
+    "seed": 101,
+    "temperature": 0
+  }
+
+
+curl http://localhost:11434/api/tags -d '{
+    "format": "json"
+}'
+
 curl http://localhost:11434/api/chat -d '{
   "model": "gemma:2b",
   "messages": [
@@ -7,7 +17,7 @@ curl http://localhost:11434/api/chat -d '{
     },
     {
       "role": "assistant",
-      "content": "the answer is four"
+      "content": "the answer is 4"
     },
     {
       "role": "user",
@@ -15,12 +25,13 @@ curl http://localhost:11434/api/chat -d '{
     },
     {
       "role": "assistant",
-      "content": "the answer is nine"
+      "content": "the answer is 9"
     },
     {
       "role": "user",
       "content": "10 / 2"
     }
   ],
-  "stream":false
+  "stream":false,
+  "format": "json"
 }'
