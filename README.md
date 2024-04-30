@@ -141,7 +141,7 @@ En la seccion de modelos de [ollama](https://ollama.com/), hay una lista de [mod
 | Gemma              | 7B         | 4.8GB | `ollama run gemma:7b`          |
 | Solar              | 10.7B      | 6.1GB | `ollama run solar`             |
 
-## 4. Descargar imagenes
+## 4. Descargar modelos
 
 Antes de iniciar hay que descargar un modelo para comenzar a interactuar como el, para este proceso se ejeucta el siguiente comando:
 
@@ -182,7 +182,7 @@ $ollama list
 
 Con los modelos descagados localmente es posible interactuar con ellos de varias formas, como se muestra a continuación:
 
-### 6.1 Modo de 1 consulta en terminal
+### 6.1 Modo de consulta en terminal
 
 En el modo de consulta se realiza una llamada al modelo y se anexa una pregunta, este generará una respuesta y la imprimira en consola.
 
@@ -213,7 +213,7 @@ El cielo no es azúl. El cielo es azul debido a que la luz solar atrae las longi
 
 * Nota: Para salir del modo interactivo se utliza la combinación de teclas **Ctrl + d**.
 
-### 6.3 Mediante consulta de la API REST con curl sin parámetros (Generación de respuesta)
+### 6.3 Mediante consulta de la API REST con [curl](https://curl.se) sin parámetros (Generación de respuesta)
 
 Consulta simple sin parámetros:
 
@@ -253,7 +253,7 @@ Ejemplo de salida
 {"model":"gemma:2b","created_at":"2024-04-30T15:18:55.909744051Z","response":"","done":true,"context":[106,1645,108,235737,1276,14419,822,34327,875,4722,27026,235336,107,108,106,2516,108,3275,34327,793,875,4722,27026,235265,2810,34327,875,13788,10755,37550,3267,13788,907,16377,14207,2881,1177,198706,12918,235265,107,108],"total_duration":6576316703,"load_duration":1781189742,"prompt_eval_count":18,"prompt_eval_duration":1362568000,"eval_count":24,"eval_duration":3391382000}
 ```
 
-### 6.4 Mediante consulta de la API REST con curl con parámetros (Generación de respuesta)
+### 6.4 Mediante consulta de la API REST con [curl](https://curl.se) con parámetros (Generación de respuesta)
 
 Consulta utilizando el parámetro stream
 
@@ -273,7 +273,7 @@ Ejemplo de salida:
 {"model":"gemma:2b","created_at":"2024-04-30T15:24:38.823431957Z","response":"El cielo no es azúl. El cielo es azul debido al efecto de Rayleigh. El efecto Rayleigh es una propiedad de la luz que establece que la luz más corta (como el azul) se dispersa más fácilmente por un medio que tiene un tamaño comparable al de las partículas del medio. El cielo está formado por el azul del universo, que es una mezcla de diferentes longitudes de onda de luz.","done":true,"context":[106,1645,108,235737,1276,14419,822,34327,875,4722,27026,235336,107,108,106,2516,108,3275,34327,793,875,4722,27026,235265,2810,34327,875,13788,34355,717,41064,581,153902,235265,2810,41064,153902,875,1749,43182,581,683,16601,907,99334,907,683,16601,3267,46326,591,14197,822,13788,235275,699,58989,235250,3267,69360,1395,748,15716,907,8819,748,33064,28477,717,581,1778,152737,1177,15716,235265,2810,34327,5365,104099,1395,822,13788,1177,68905,235269,907,875,1749,59619,581,17340,29717,484,581,73227,581,16601,235265,107,108],"total_duration":7129292361,"load_duration":2006890139,"prompt_eval_count":18,"prompt_eval_duration":575924000,"eval_count":82,"eval_duration":4499467000}
 ```
 
-### 6.5 Mediante consulta de la API REST con curl sin parámetros (Modo Chat)
+### 6.5 Mediante consulta de la API REST con [curl](https://curl.se) sin parámetros (Modo Chat)
 
 Consulta simple sin parámetros:
 
@@ -330,7 +330,7 @@ Ejemplo de salida
 {"model":"gemma:2b","created_at":"2024-04-30T15:29:11.898162059Z","message":{"role":"assistant","content":""},"done":true,"total_duration":6877077389,"load_duration":1313820,"prompt_eval_duration":269637000,"eval_count":39,"eval_duration":6476435000}
 ```
 
-### 6.6 Mediante consulta de la API REST con curl con parámetros (Modo Chat)
+### 6.6 Mediante consulta de la API REST con [curl](https://curl.se) con parámetros (Modo Chat)
 
 Consulta simple sin parámetros:
 
@@ -350,11 +350,11 @@ Ejemplo de salida
 {"model":"gemma:2b","created_at":"2024-04-30T15:30:11.27210018Z","message":{"role":"assistant","content":"El cielo no es azúl. El cielo es un color azul debido a la refracción y la dispersión de la luz solar en los gases del espacio interestelar."},"done":true,"total_duration":2582132933,"load_duration":1024500,"prompt_eval_duration":117876000,"eval_count":35,"eval_duration":2321719000}
 ```
 
-### 6.7 Mediante consulta de la API REST enviando una imagen en codificada Base64
+### 6.7 Mediante consulta de la API REST con [curl](https://curl.se) enviando una imagen en codificada [Base64](https://developer.mozilla.org/es/docs/Glossary/Base64)
 
 Para envair archivos, en este caso imagenes se deben codificar a Base64, esto se puede hacer desde una terminal de linux de la siguiente forma:
 
-#### Codificar  imagen a Base64
+#### Codificar  imagen a [Base64](https://developer.mozilla.org/es/docs/Glossary/Base64)
 
 ![imagen1.jpg](assets/images/imagen1.jpg)
 
@@ -379,7 +379,7 @@ Ejemplo de resultado:
 
 Una vez que ya se tiene la imagen codificada en Base64 se hace una consulta a la api de ollama de la siguiente forma:
 
-* Nota: para poder analizar imagenes es necesario tener un modelo de lenguaje grande **MULTIMODAL** (Este es un tipo de modelo que puede procesar y generar datos de múltiples modalidades, como texto, imágenes, audio, video, entre otros), en este ejemplo se utiliza [llava](https://ollama.com/library/llava).
+* Nota: para poder analizar imagenes es necesario tener un modelo de lenguaje grande **MULTIMODAL** (Este es un tipo de modelo que puede procesar y generar datos de múltiples modalidades, como texto, imágenes, audio, video, entre otros), en este ejemplo se utiliza [llaVa](https://ollama.com/library/llava).
 
 ```bash
 $ollama pull llava
@@ -400,4 +400,59 @@ Ejemplo de salida
 
 ```bash
 {"model":"llava","created_at":"2024-04-30T16:09:49.001007945Z","response":" The image shows a playful, black and white line drawing of an animated character that resembles a cat. The cat is standing on its hind legs with its front paws raised as if waving or gesturing. It has small ears, eyes, and a simple body structure that's typical of such stylized representations. On the right side of the image, there are two speech bubbles, suggesting that the cat character is interacting with another entity or character off-frame to its right. The background is plain white, which contrasts with the black lines and fills of the drawing, making it stand out clearly. ","done":true,"context":[733,16289,28793,18297,5916,5748,543,3809,269,28804,733,28748,16289,28793,415,3469,4370,264,1156,1007,28725,2687,304,3075,1407,10916,302,396,25693,3233,369,312,5650,867,264,5255,28723,415,5255,349,6328,356,871,21413,7969,395,871,2778,284,6195,6333,390,513,275,1652,442,7165,1378,28723,661,659,1741,12446,28725,2282,28725,304,264,3588,2187,4693,369,28742,28713,10842,302,1259,341,2951,1332,23384,28723,1418,272,1103,2081,302,272,3469,28725,736,460,989,8666,22723,9343,28725,20223,369,272,5255,3233,349,14113,288,395,1698,9040,442,3233,805,28733,3413,298,871,1103,28723,415,5414,349,10835,3075,28725,690,9349,28713,395,272,2687,4715,304,285,2767,302,272,10916,28725,2492,378,1876,575,6315,28723,28705],"total_duration":71745948206,"load_duration":4611259,"prompt_eval_count":1,"prompt_eval_duration":55839368000,"eval_count":131,"eval_duration":15852660000}
+```
+
+
+### 6.8 Solicitar resultado reproducibles
+
+Caundo se realiza una solicitud para que genere una respuesta, cada vez que se realiza esta el resultado es ligeramente distinto, produciendo salidas que varian en longitud y texto, tal como se muestra en el siguiente ejemplo.
+
+#### Solicitud NO reproducible
+
+```bash
+curl http://localhost:11434/api/generate -d '{
+  "model": "gemma:2b",
+  "prompt": "Explica por qué el cielo es azúl, en una frase",
+  "stream":false
+}'
+```
+
+* Ejemplo de salida 1
+
+```bash
+{"model":"gemma:2b","created_at":"2024-04-30T16:56:58.006197247Z","response":"El cielo no es azúl. El cielo es una color azul debido al dispersión del luz solar en las moléculas de aire y las nubes.","done":true,"context":[106,1645,108,4208,3747,1395,12103,822,34327,875,4722,27026,235269,659,1749,52148,107,108,106,2516,108,3275,34327,793,875,4722,27026,235265,2810,34327,875,1749,2881,13788,34355,717,26640,7439,1177,16601,12677,659,1778,232293,581,22897,597,1778,113767,235265,107,108],"total_duration":4362936189,"load_duration":866880,"prompt_eval_duration":121799000,"eval_count":30,"eval_duration":4196229000}
+```
+
+* Ejemplo de salida 2 
+
+```bash
+{"model":"gemma:2b","created_at":"2024-04-30T16:57:05.014511074Z","response":"El cielo no es azúl. El cielo es un color azul debido a que la luz solar se dispersa en diferentes longitudes de onda, con el azul siendo más disperso que otros colores.","done":true,"context":[106,1645,108,4208,3747,1395,12103,822,34327,875,4722,27026,235269,659,1749,52148,107,108,106,2516,108,3275,34327,793,875,4722,27026,235265,2810,34327,875,748,2881,13788,34355,476,907,683,16601,12677,699,58989,235250,659,17340,29717,484,581,73227,235269,632,822,13788,33830,3267,58989,235253,907,12699,26962,235265,107,108],"total_duration":3642038753,"load_duration":752310,"prompt_eval_duration":88169000,"eval_count":41,"eval_duration":3506293000}
+```
+
+#### Solicitud REPRODUCIBLE utilizando parámetros
+
+Para solicitar salidas que siempre den el mismo resultado se configuran los parámetros de **seed** y **temperature**, con lo que la salida para la misma entrada sea igual las veces que se realice.
+
+```bash
+curl http://localhost:11434/api/generate -d '{
+  "model": "gemma:2b",
+  "prompt": "Explica por qué el cielo es azúl, en una frase",
+  "options": {
+    "seed": 123,
+    "temperature": 0
+  },
+  "stream":false
+}'
+```
+
+* Ejemplo salida 1
+
+```bash
+{"model":"gemma:2b","created_at":"2024-04-30T17:04:15.794204842Z","response":"El cielo no es azúl. El cielo es un color azul debido a que la luz solar se dispersa en las moléculas de aire en la atmósfera.","done":true,"context":[106,1645,108,4208,3747,1395,12103,822,34327,875,4722,27026,235269,659,1749,52148,107,108,106,2516,108,3275,34327,793,875,4722,27026,235265,2810,34327,875,748,2881,13788,34355,476,907,683,16601,12677,699,58989,235250,659,1778,232293,581,22897,659,683,178353,235265,107,108],"total_duration":7007790827,"load_duration":1820359087,"prompt_eval_count":22,"prompt_eval_duration":1266107000,"eval_count":32,"eval_duration":3880282000}
+```
+
+* Ejemplo salida 2
+
+```bash
+{"model":"gemma:2b","created_at":"2024-04-30T17:04:49.62753399Z","response":"El cielo no es azúl. El cielo es un color azul debido a que la luz solar se dispersa en las moléculas de aire en la atmósfera.","done":true,"context":[106,1645,108,4208,3747,1395,12103,822,34327,875,4722,27026,235269,659,1749,52148,107,108,106,2516,108,3275,34327,793,875,4722,27026,235265,2810,34327,875,748,2881,13788,34355,476,907,683,16601,12677,699,58989,235250,659,1778,232293,581,22897,659,683,178353,235265,107,108],"total_duration":2570844229,"load_duration":890960,"prompt_eval_duration":112040000,"eval_count":32,"eval_duration":2415581000}
 ```
