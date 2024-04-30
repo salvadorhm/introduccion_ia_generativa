@@ -21,15 +21,15 @@ Una forma de utilizar los modelos de lenguaje grande de forma local es mediante 
 | 3 | [LM Studio](https://lmstudio.ai/) | Es una herrameinta que permite desacargar y ejecutar modelos de lenguaje grande de forma local, permite interactuar con ellos mediante un chatBot, además de montar un servidor basado en la API libre de [OpenAI](https://platform.openai.com/docs/api-reference). |
 | 4 | [JAN](https://jan.ai/about) | Es una herramienta alternativa de código abierto para ejecuar ChatGPT de [OpenAI](https://platform.openai.com/docs/api-reference). |
 
-
-
 # ollama
 
 ## 1. Instalación de ollama
 
 En este curso se utilizará [ollama](https://ollama.com/), que es una herramienta que permite ejecutar modelos de lenguaje largo, además de permitir descagar, entrenar y generar nuevos modelos.
 
-Pasos para la instalación de [ollama](https://ollama.com/) en Linux, macOS y Windows.
+Para realizar la instalación de ollama se debe descargar la versión que corresponda al sistema operativo que se utiliza (Linux, macOS y Windows), esto se hace en la página oficial de [ollama download](https://ollama.com/download) en Linux, macOS y Windows.
+
+### 1.1 Instalación en GNU Linux
 
 ```bash
 $curl -fsSL https://ollama.com/install.sh | sh
@@ -44,6 +44,51 @@ Para iniciar el servidor se ejecuta el siguiente comando:
 ```bash
 $ollama serve
 ```
+Ejemplo de ejecución del servidor
+
+```bash
+time=2024-04-30T15:06:53.323Z level=INFO source=images.go:817 msg="total blobs: 5"
+time=2024-04-30T15:06:53.323Z level=INFO source=images.go:824 msg="total unused blobs removed: 0"
+time=2024-04-30T15:06:53.324Z level=INFO source=routes.go:1143 msg="Listening on 127.0.0.1:11434 (version 0.1.32)"
+time=2024-04-30T15:06:53.324Z level=INFO source=payload.go:28 msg="extracting embedded files" dir=/tmp/ollama523635885/runners
+time=2024-04-30T15:06:56.217Z level=INFO source=payload.go:41 msg="Dynamic LLM libraries [cpu_avx cpu_avx2 cuda_v11 rocm_v60002 cpu]"
+time=2024-04-30T15:06:56.217Z level=INFO source=gpu.go:121 msg="Detecting GPU type"
+time=2024-04-30T15:06:56.217Z level=INFO source=gpu.go:268 msg="Searching for GPU management library libcudart.so*"
+time=2024-04-30T15:06:56.218Z level=INFO source=gpu.go:314 msg="Discovered GPU libraries: [/tmp/ollama523635885/runners/cuda_v11/libcudart.so.11.0]"
+time=2024-04-30T15:06:56.218Z level=INFO source=gpu.go:343 msg="Unable to load cudart CUDA management library /tmp/ollama523635885/runners/cuda_v11/libcudart.so.11.0: your nvidia driver is too old or missing, please upgrade to run ollama"
+time=2024-04-30T15:06:56.219Z level=INFO source=gpu.go:268 msg="Searching for GPU management library libnvidia-ml.so"
+time=2024-04-30T15:06:56.220Z level=INFO source=gpu.go:314 msg="Discovered GPU libraries: []"
+time=2024-04-30T15:06:56.220Z level=INFO source=cpu_common.go:11 msg="CPU has AVX2"
+time=2024-04-30T15:06:56.220Z level=INFO source=routes.go:1164 msg="no GPU detected"
+```
+
+Ejemplo de ejecución cuando recibe una petición
+
+```bash
+{"function":"log_server_request","level":"INFO","line":2734,"method":"GET","msg":"request","params":{},"path":"/health","remote_addr":"127.0.0.1","remote_port":57132,"status":200,"tid":"140145076446784","timestamp":1714489663}
+{"function":"process_single_task","level":"INFO","line":1506,"msg":"slot data","n_idle_slots":1,"n_processing_slots":0,"task_id":2,"tid":"140147531671424","timestamp":1714489663}
+{"function":"log_server_request","level":"INFO","line":2734,"method":"GET","msg":"request","params":{},"path":"/health","remote_addr":"127.0.0.1","remote_port":57136,"status":200,"tid":"140145237952064","timestamp":1714489663}
+{"function":"process_single_task","level":"INFO","line":1506,"msg":"slot data","n_idle_slots":1,"n_processing_slots":0,"task_id":3,"tid":"140147531671424","timestamp":1714489663}
+{"function":"log_server_request","level":"INFO","line":2734,"method":"GET","msg":"request","params":{},"path":"/health","remote_addr":"127.0.0.1","remote_port":36780,"status":200,"tid":"140145271522880","timestamp":1714489663}
+{"function":"process_single_task","level":"INFO","line":1506,"msg":"slot data","n_idle_slots":1,"n_processing_slots":0,"task_id":4,"tid":"140147531671424","timestamp":1714489663}
+{"function":"log_server_request","level":"INFO","line":2734,"method":"GET","msg":"request","params":{},"path":"/health","remote_addr":"127.0.0.1","remote_port":36784,"status":200,"tid":"140145246344768","timestamp":1714489663}
+{"function":"log_server_request","level":"INFO","line":2734,"method":"GET","msg":"request","params":{},"path":"/health","remote_addr":"127.0.0.1","remote_port":36788,"status":200,"tid":"140145263130176","timestamp":1714489663}
+{"function":"process_single_task","level":"INFO","line":1506,"msg":"slot data","n_idle_slots":1,"n_processing_slots":0,"task_id":5,"tid":"140147531671424","timestamp":1714489663}
+{"function":"log_server_request","level":"INFO","line":2734,"method":"GET","msg":"request","params":{},"path":"/health","remote_addr":"127.0.0.1","remote_port":36788,"status":200,"tid":"140145263130176","timestamp":1714489663}
+{"function":"launch_slot_with_data","level":"INFO","line":830,"msg":"slot is processing task","slot_id":0,"task_id":6,"tid":"140147531671424","timestamp":1714489663}
+{"function":"update_slots","ga_i":0,"level":"INFO","line":1809,"msg":"slot progression","n_past":0,"n_past_se":0,"n_prompt_tokens_processed":18,"slot_id":0,"task_id":6,"tid":"140147531671424","timestamp":1714489663}
+{"function":"update_slots","level":"INFO","line":1836,"msg":"kv cache rm [p0, end)","p0":0,"slot_id":0,"task_id":6,"tid":"140147531671424","timestamp":1714489663}
+{"function":"print_timings","level":"INFO","line":269,"msg":"prompt eval time     =    1442.30 ms /    18 tokens (   80.13 ms per token,    12.48 tokens per second)","n_prompt_tokens_processed":18,"n_tokens_second":12.480092519085876,"slot_id":0,"t_prompt_processing":1442.297,"t_token":80.12761111111111,"task_id":6,"tid":"140147531671424","timestamp":1714489668}
+{"function":"print_timings","level":"INFO","line":283,"msg":"generation eval time =    3389.28 ms /    22 runs   (  154.06 ms per token,     6.49 tokens per second)","n_decoded":22,"n_tokens_second":6.491046486514556,"slot_id":0,"t_token":154.05836363636365,"t_token_generation":3389.284,"task_id":6,"tid":"140147531671424","timestamp":1714489668}
+{"function":"print_timings","level":"INFO","line":293,"msg":"          total time =    4831.58 ms","slot_id":0,"t_prompt_processing":1442.297,"t_token_generation":3389.284,"t_total":4831.581,"task_id":6,"tid":"140147531671424","timestamp":1714489668}
+{"function":"update_slots","level":"INFO","line":1640,"msg":"slot released","n_cache_tokens":40,"n_ctx":2048,"n_past":39,"n_system_tokens":0,"slot_id":0,"task_id":6,"tid":"140147531671424","timestamp":1714489668,"truncated":false}
+{"function":"log_server_request","level":"INFO","line":2734,"method":"POST","msg":"request","params":{},"path":"/completion","remote_addr":"127.0.0.1","remote_port":36788,"status":200,"tid":"140145263130176","timestamp":1714489668}
+{"function":"process_single_task","level":"INFO","line":1506,"msg":"slot data","n_idle_slots":1,"n_processing_slots":0,"task_id":31,"tid":"140147531671424","timestamp":1714489668}
+{"function":"log_server_request","level":"INFO","line":2734,"method":"GET","msg":"request","params":{},"path":"/health","remote_addr":"127.0.0.1","remote_port":36802,"status":200,"tid":"140145254737472","timestamp":1714489668}
+{"function":"log_server_request","level":"INFO","line":2734,"method":"POST","msg":"request","params":{},"path":"/tokenize","remote_addr":"127.0.0.1","remote_port":36802,"status":200,"tid":"140145254737472","timestamp":1714489668}
+[GIN] 2024/04/30 - 15:07:48 | 200 |  7.046967594s |       127.0.0.1 | POST     "/api/generate"
+```
+
 
 ## 3. Lista de modelos disponibles
 
@@ -73,7 +118,22 @@ En la seccion de modelos de [ollama](https://ollama.com/), hay una lista de [mod
 Antes de iniciar hay que descargar un modelo para comenzar a interactuar como el, para este proceso se ejeucta el siguiente comando:
 
 ```bash
-$ollama pull llama2
+$ollama pull gemma:2b
+```
+
+Ejemplo de desacarga del modelo gemma:2b
+
+```bash
+pulling manifest 
+pulling c1864a5eb193... 100% ▕█████████████████████████████████████████████████████████████████████▏ 1.7 GB                         
+pulling 097a36493f71... 100% ▕█████████████████████████████████████████████████████████████████████▏ 8.4 KB                         
+pulling 109037bec39c... 100% ▕█████████████████████████████████████████████████████████████████████▏  136 B                         
+pulling 22a838ceb7fb... 100% ▕█████████████████████████████████████████████████████████████████████▏   84 B                         
+pulling 887433b89a90... 100% ▕█████████████████████████████████████████████████████████████████████▏  483 B                         
+verifying sha256 digest 
+writing manifest 
+removing any unused layers 
+success 
 ```
 
 ## 5. Ver modelos descagados
@@ -88,10 +148,7 @@ $ollama list
 
 | NAME | ID | SIZE | MODIFIED |
 | -- | -- | -- | -- |
-| llama2:latest| 78e26419b446 | 3.8 GB | 37 hours ago |
-| orca-mini:3b | 2dbd9f439647 | 2.0 GB | 37 hours ago |
-| phi:latest | e2fd6321a5fe | 1.6 GB | 37 hours ago |
-| tinyllama:latest | 2644915ede35 | 637 MB | 37 hours ago |
+| gemma:2b | b50d6c999e59 | 1.7 GB | 41 seconds ago |
 
 ## 6. Ejecutar modelo
 
@@ -102,11 +159,28 @@ Con los modelos descagados localmente es posible interactuar con ellos de dos fo
 En el modo de consulta se realiza una llamada al modelo y se anexa una pregunta, este generará una respuesta y la imprimira en consola.
 
 ```bash
-$ollama run llama2 ¿porqué el cielo es azúl?
+$ollama run gemma:2b ¿porqué el cielo es azúl?
+```
+
+Ejemplo de salida
+
+```bash
+El cielo no es azúl. El cielo es azul porque las longitudes de onda del azul son más largas que las longitudes de onda del rojo. Esto significa que la luz azul está menos dispersada en el aire, lo que significa que está más estable y aparece azul.
 ```
 
 ### 6.2 Modo interactivo
 
 ```bash
-$ollama run llama2
+$ollama run gemma:2b
 ```
+
+Ejemplo de salida
+
+```bash
+>>> ¿porqué el cielo es azúl?
+El cielo no es azúl. El cielo es azul debido a que la luz solar atrae las longitudes de onda más cortas en la atmósfera, como el azul y el verde.
+
+>>> Send a message (/? for help)
+```
+
+Nota: Para salir del modo interactivo se utliza la combinación de teclas **Ctrl + d**.
