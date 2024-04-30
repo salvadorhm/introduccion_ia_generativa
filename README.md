@@ -23,9 +23,9 @@ Una forma de utilizar los modelos de lenguaje grande de forma local es mediante 
 
 # ollama
 
-## 1. Instalación de ollama
+Para esta parte del curso se basa en la documentación del repositorio de [ollama github](https://github.com/ollama/ollama)
 
-En este curso se utilizará [ollama](https://ollama.com/), que es una herramienta que permite ejecutar modelos de lenguaje largo, además de permitir descagar, entrenar y generar nuevos modelos.
+## 1. Instalación de ollama
 
 Para realizar la instalación de ollama se debe descargar la versión que corresponda al sistema operativo que se utiliza (Linux, macOS y Windows), esto se hace en la página oficial de [ollama download](https://ollama.com/download) en Linux, macOS y Windows.
 
@@ -44,7 +44,10 @@ Para iniciar el servidor se ejecuta el siguiente comando:
 ```bash
 $ollama serve
 ```
-Ejemplo de ejecución del servidor
+
+Nota: al ejeuctar el servidor este habilita un servicio en **http://localhost:11434**, al que se puede acceder de diferentes formas, como se vera posteriormente.
+
+### 2.1 Ejemplo de ejecución del servidor cuando se usa solo la CPU
 
 ```bash
 time=2024-04-30T15:06:53.323Z level=INFO source=images.go:817 msg="total blobs: 5"
@@ -62,7 +65,13 @@ time=2024-04-30T15:06:56.220Z level=INFO source=cpu_common.go:11 msg="CPU has AV
 time=2024-04-30T15:06:56.220Z level=INFO source=routes.go:1164 msg="no GPU detected"
 ```
 
-Ejemplo de ejecución cuando recibe una petición
+### 2.2 Ejemplo de ejecución del servidor cuando se utiliza GPU
+
+```bash
+pendiente
+```
+
+### 2.3 Ejemplo de ejecución cuando recibe una petición
 
 ```bash
 {"function":"log_server_request","level":"INFO","line":2734,"method":"GET","msg":"request","params":{},"path":"/health","remote_addr":"127.0.0.1","remote_port":57132,"status":200,"tid":"140145076446784","timestamp":1714489663}
@@ -88,7 +97,6 @@ Ejemplo de ejecución cuando recibe una petición
 {"function":"log_server_request","level":"INFO","line":2734,"method":"POST","msg":"request","params":{},"path":"/tokenize","remote_addr":"127.0.0.1","remote_port":36802,"status":200,"tid":"140145254737472","timestamp":1714489668}
 [GIN] 2024/04/30 - 15:07:48 | 200 |  7.046967594s |       127.0.0.1 | POST     "/api/generate"
 ```
-
 
 ## 3. Lista de modelos disponibles
 
@@ -152,9 +160,9 @@ $ollama list
 
 ## 6. Ejecutar modelo
 
-Con los modelos descagados localmente es posible interactuar con ellos de dos formas, como se muestra a continuación:
+Con los modelos descagados localmente es posible interactuar con ellos de varias formas, como se muestra a continuación:
 
-### 6.1 Modo de 1 consulta
+### 6.1 Modo de 1 consulta en terminal
 
 En el modo de consulta se realiza una llamada al modelo y se anexa una pregunta, este generará una respuesta y la imprimira en consola.
 
@@ -168,7 +176,7 @@ Ejemplo de salida
 El cielo no es azúl. El cielo es azul porque las longitudes de onda del azul son más largas que las longitudes de onda del rojo. Esto significa que la luz azul está menos dispersada en el aire, lo que significa que está más estable y aparece azul.
 ```
 
-### 6.2 Modo interactivo
+### 6.2 Modo interactivo en terminal
 
 ```bash
 $ollama run gemma:2b
@@ -184,3 +192,140 @@ El cielo no es azúl. El cielo es azul debido a que la luz solar atrae las longi
 ```
 
 Nota: Para salir del modo interactivo se utliza la combinación de teclas **Ctrl + d**.
+
+### 6.3 Mediante consulta de la API REST con curl sin parámetros (Generación de respuesta)
+
+Consulta simple sin parámetros:
+
+```bash
+curl http://localhost:11434/api/generate -d '{
+  "model": "gemma:2b",
+  "prompt":"¿porqué el cielo es azúl?"
+}'
+```
+
+Ejemplo de salida
+
+```bash
+{"model":"gemma:2b","created_at":"2024-04-30T15:18:52.51818509Z","response":"El","done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:18:52.695474933Z","response":" cielo","done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:18:52.798268348Z","response":" no","done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:18:52.907026682Z","response":" es","done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:18:53.019430275Z","response":" az","done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:18:53.196500878Z","response":"úl","done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:18:53.298319953Z","response":".","done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:18:53.400066568Z","response":" El","done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:18:53.501729123Z","response":" cielo","done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:18:53.620523445Z","response":" es","done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:18:53.807266717Z","response":" azul","done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:18:53.92047312Z","response":" porque","done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:18:54.106861762Z","response":" contiene","done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:18:54.225510424Z","response":" más","done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:18:54.408772977Z","response":" azul","done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:18:54.52286666Z","response":" que","done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:18:54.695894974Z","response":" cualquier","done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:18:54.815171036Z","response":" otro","done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:18:54.996691939Z","response":" color","done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:18:55.117217561Z","response":" del","done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:18:55.311956601Z","response":" espectro","done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:18:55.513452331Z","response":" visible","done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:18:55.71979871Z","response":".","done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:18:55.909744051Z","response":"","done":true,"context":[106,1645,108,235737,1276,14419,822,34327,875,4722,27026,235336,107,108,106,2516,108,3275,34327,793,875,4722,27026,235265,2810,34327,875,13788,10755,37550,3267,13788,907,16377,14207,2881,1177,198706,12918,235265,107,108],"total_duration":6576316703,"load_duration":1781189742,"prompt_eval_count":18,"prompt_eval_duration":1362568000,"eval_count":24,"eval_duration":3391382000}
+```
+
+### 6.4 Mediante consulta de la API REST con curl con parámetros (Generación de respuesta)
+
+Consulta utilizando el parámetro stream
+
+```bash
+curl http://localhost:11434/api/generate -d '{
+  "model": "gemma:2b",
+  "prompt":"¿porqué el cielo es azúl?",
+  "stream" : false
+}'
+```
+
+Como se puede ver en la salida, el resultado no se va mostrando palabra por palabra, sólo se muestra el resultado final.
+
+Ejemplo de salida:
+
+```bash
+{"model":"gemma:2b","created_at":"2024-04-30T15:24:38.823431957Z","response":"El cielo no es azúl. El cielo es azul debido al efecto de Rayleigh. El efecto Rayleigh es una propiedad de la luz que establece que la luz más corta (como el azul) se dispersa más fácilmente por un medio que tiene un tamaño comparable al de las partículas del medio. El cielo está formado por el azul del universo, que es una mezcla de diferentes longitudes de onda de luz.","done":true,"context":[106,1645,108,235737,1276,14419,822,34327,875,4722,27026,235336,107,108,106,2516,108,3275,34327,793,875,4722,27026,235265,2810,34327,875,13788,34355,717,41064,581,153902,235265,2810,41064,153902,875,1749,43182,581,683,16601,907,99334,907,683,16601,3267,46326,591,14197,822,13788,235275,699,58989,235250,3267,69360,1395,748,15716,907,8819,748,33064,28477,717,581,1778,152737,1177,15716,235265,2810,34327,5365,104099,1395,822,13788,1177,68905,235269,907,875,1749,59619,581,17340,29717,484,581,73227,581,16601,235265,107,108],"total_duration":7129292361,"load_duration":2006890139,"prompt_eval_count":18,"prompt_eval_duration":575924000,"eval_count":82,"eval_duration":4499467000}
+```
+
+### 6.5 Mediante consulta de la API REST con curl sin parámetros (Modo Chat)
+
+Consulta simple sin parámetros:
+
+```bash
+curl http://localhost:11434/api/chat -d '{
+  "model": "gemma:2b",
+  "messages": [
+    { "role": "user", "content": "¿porqué el cielo es azúl?" }
+  ]
+}'
+```
+
+Ejemplo de salida
+
+```bash
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:05.42156699Z","message":{"role":"assistant","content":"El"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:05.622209069Z","message":{"role":"assistant","content":" cielo"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:05.913998916Z","message":{"role":"assistant","content":" no"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:06.294631829Z","message":{"role":"assistant","content":" es"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:06.412776811Z","message":{"role":"assistant","content":" az"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:06.528744984Z","message":{"role":"assistant","content":"úl"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:06.708626937Z","message":{"role":"assistant","content":"."},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:06.894168579Z","message":{"role":"assistant","content":" El"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:07.010996671Z","message":{"role":"assistant","content":" cielo"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:07.121965715Z","message":{"role":"assistant","content":" es"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:07.299675718Z","message":{"role":"assistant","content":" un"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:07.429267309Z","message":{"role":"assistant","content":" color"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:07.607947782Z","message":{"role":"assistant","content":" negro"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:07.721824475Z","message":{"role":"assistant","content":" y"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:07.899275938Z","message":{"role":"assistant","content":" azul"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:08.013422521Z","message":{"role":"assistant","content":" debido"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:08.194411494Z","message":{"role":"assistant","content":" al"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:08.311352126Z","message":{"role":"assistant","content":" re"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:08.506407367Z","message":{"role":"assistant","content":"frac"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:08.629716209Z","message":{"role":"assistant","content":"ción"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:08.901192158Z","message":{"role":"assistant","content":" y"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:09.017438371Z","message":{"role":"assistant","content":" la"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:09.206972862Z","message":{"role":"assistant","content":" absorción"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:09.399381534Z","message":{"role":"assistant","content":" de"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:09.515039496Z","message":{"role":"assistant","content":" la"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:09.696289069Z","message":{"role":"assistant","content":" luz"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:09.82081905Z","message":{"role":"assistant","content":" solar"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:10.011480392Z","message":{"role":"assistant","content":" por"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:10.194901744Z","message":{"role":"assistant","content":" las"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:10.308155347Z","message":{"role":"assistant","content":" moléculas"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:10.494352649Z","message":{"role":"assistant","content":" del"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:10.617334751Z","message":{"role":"assistant","content":" aire"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:10.795765214Z","message":{"role":"assistant","content":" y"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:10.995529414Z","message":{"role":"assistant","content":" el"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:11.197993284Z","message":{"role":"assistant","content":" espacio"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:11.313081816Z","message":{"role":"assistant","content":" interes"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:11.506970428Z","message":{"role":"assistant","content":"telar"},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:11.620706891Z","message":{"role":"assistant","content":"."},"done":false}
+{"model":"gemma:2b","created_at":"2024-04-30T15:29:11.898162059Z","message":{"role":"assistant","content":""},"done":true,"total_duration":6877077389,"load_duration":1313820,"prompt_eval_duration":269637000,"eval_count":39,"eval_duration":6476435000}
+```
+
+### 6.6 Mediante consulta de la API REST con curl con parámetros (Modo Chat)
+
+Consulta simple sin parámetros:
+
+```bash
+curl http://localhost:11434/api/chat -d '{
+  "model": "gemma:2b",
+  "messages": [
+    { "role": "user", "content": "¿porqué el cielo es azúl?" }
+  ],
+  "stream": false
+}'
+```
+
+Ejemplo de salida
+
+```bash
+{"model":"gemma:2b","created_at":"2024-04-30T15:30:11.27210018Z","message":{"role":"assistant","content":"El cielo no es azúl. El cielo es un color azul debido a la refracción y la dispersión de la luz solar en los gases del espacio interestelar."},"done":true,"total_duration":2582132933,"load_duration":1024500,"prompt_eval_duration":117876000,"eval_count":35,"eval_duration":2321719000}
+```
