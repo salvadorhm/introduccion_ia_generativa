@@ -273,15 +273,30 @@ Ejemplo de salida:
 {"model":"gemma:2b","created_at":"2024-04-30T15:24:38.823431957Z","response":"El cielo no es azúl. El cielo es azul debido al efecto de Rayleigh. El efecto Rayleigh es una propiedad de la luz que establece que la luz más corta (como el azul) se dispersa más fácilmente por un medio que tiene un tamaño comparable al de las partículas del medio. El cielo está formado por el azul del universo, que es una mezcla de diferentes longitudes de onda de luz.","done":true,"context":[106,1645,108,235737,1276,14419,822,34327,875,4722,27026,235336,107,108,106,2516,108,3275,34327,793,875,4722,27026,235265,2810,34327,875,13788,34355,717,41064,581,153902,235265,2810,41064,153902,875,1749,43182,581,683,16601,907,99334,907,683,16601,3267,46326,591,14197,822,13788,235275,699,58989,235250,3267,69360,1395,748,15716,907,8819,748,33064,28477,717,581,1778,152737,1177,15716,235265,2810,34327,5365,104099,1395,822,13788,1177,68905,235269,907,875,1749,59619,581,17340,29717,484,581,73227,581,16601,235265,107,108],"total_duration":7129292361,"load_duration":2006890139,"prompt_eval_count":18,"prompt_eval_duration":575924000,"eval_count":82,"eval_duration":4499467000}
 ```
 
+Elementos que contiene la respuesta
+
+- **model:** Módelo utilizado
+- **total_duration:** Tiempo dedicado a generar la respuesta.
+- **load_duration:** Tiempo dedicado en nanosegundos a cargar el modelo.
+- **prompt_eval_count:** Número de tokens en el estímulo o indicación.
+- **prompt_eval_duration:** Tiempo dedicado en nanosegundos a evaluar el estímulo o indicación.
+- **eval_count:** Número de tokens en la respuesta.
+- **eval_duration:** Tiempo en nanosegundos dedicado a generar la respuesta.
+- **context:** Una codificación de la conversación utilizada en esta respuesta, esto puede ser enviado en la siguiente solicitud para mantener una memoria conversacional.
+- **response:** Vacío si la respuesta fue transmitida en tiempo real, si no fue transmitida en tiempo real, esto contendrá la respuesta completa.
+
 ### 6.5 Mediante consulta de la API REST con [curl](https://curl.se) sin parámetros (Modo Chat)
 
 Consulta simple sin parámetros:
 
-```bash
+```shell
 curl http://localhost:11434/api/chat -d '{
   "model": "gemma:2b",
   "messages": [
-    { "role": "user", "content": "¿porqué el cielo es azúl?" }
+    { 
+        "role": "user", 
+        "content": "¿porqué el cielo es azúl?" 
+    }
   ]
 }'
 ```
@@ -338,7 +353,10 @@ Consulta simple sin parámetros:
 curl http://localhost:11434/api/chat -d '{
   "model": "gemma:2b",
   "messages": [
-    { "role": "user", "content": "¿porqué el cielo es azúl?" }
+    { 
+        "role": "user", 
+        "content": "¿porqué el cielo es azúl?" 
+    }
   ],
   "stream": false
 }'
@@ -349,6 +367,24 @@ Ejemplo de salida
 ```json
 {"model":"gemma:2b","created_at":"2024-04-30T15:30:11.27210018Z","message":{"role":"assistant","content":"El cielo no es azúl. El cielo es un color azul debido a la refracción y la dispersión de la luz solar en los gases del espacio interestelar."},"done":true,"total_duration":2582132933,"load_duration":1024500,"prompt_eval_duration":117876000,"eval_count":35,"eval_duration":2321719000}
 ```
+
+#### Parámetros que contiene la entrada
+
+- **model:** (obligatorio) el nombre del modelo.
+- **message:** los mensajes del chat, esto puede ser utilizado para mantener una memoria del chat.
+
+El objeto de mensaje tiene los siguientes campos:
+
+- **role:** el rol del mensaje, ya sea sistema, usuario o asistente.
+- **content:** el contenido del mensaje.
+- **images** (opcional): una lista de imágenes para incluir en el mensaje (para modelos multimodales como llava).
+
+Parámetros avanzados (opcional):
+
+- **format:** el formato para devolver una respuesta. Actualmente, el único valor aceptado es JSON.
+- **options:** parámetros adicionales del modelo listados en la [documentación](https://github.com/ollama/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values) para el archivo de modelo, como temperatura.
+- **stream:** si es falso, la respuesta se devolverá como un único objeto de respuesta, en lugar de un flujo de objetos.
+- **keep_alive:** controla cuánto tiempo el modelo permanecerá cargado en la memoria después de la solicitud (por defecto: 5 minutos).
 
 ### 6.7 Mediante consulta de la API REST con [curl](https://curl.se) enviando una imagen en codificada [Base64](https://developer.mozilla.org/es/docs/Glossary/Base64)
 
