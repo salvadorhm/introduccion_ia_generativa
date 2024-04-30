@@ -93,7 +93,7 @@ pendiente
 
 ### 2.3 Ejemplo de ejecución cuando recibe una petición
 
-```bash
+```json
 {"function":"log_server_request","level":"INFO","line":2734,"method":"GET","msg":"request","params":{},"path":"/health","remote_addr":"127.0.0.1","remote_port":57132,"status":200,"tid":"140145076446784","timestamp":1714489663}
 {"function":"process_single_task","level":"INFO","line":1506,"msg":"slot data","n_idle_slots":1,"n_processing_slots":0,"task_id":2,"tid":"140147531671424","timestamp":1714489663}
 {"function":"log_server_request","level":"INFO","line":2734,"method":"GET","msg":"request","params":{},"path":"/health","remote_addr":"127.0.0.1","remote_port":57136,"status":200,"tid":"140145237952064","timestamp":1714489663}
@@ -457,3 +457,40 @@ curl http://localhost:11434/api/generate -d '{
 ```json
 {"model":"gemma:2b","created_at":"2024-04-30T17:04:49.62753399Z","response":"El cielo no es azúl. El cielo es un color azul debido a que la luz solar se dispersa en las moléculas de aire en la atmósfera.","done":true,"context":[106,1645,108,4208,3747,1395,12103,822,34327,875,4722,27026,235269,659,1749,52148,107,108,106,2516,108,3275,34327,793,875,4722,27026,235265,2810,34327,875,748,2881,13788,34355,476,907,683,16601,12677,699,58989,235250,659,1778,232293,581,22897,659,683,178353,235265,107,108],"total_duration":2570844229,"load_duration":890960,"prompt_eval_duration":112040000,"eval_count":32,"eval_duration":2415581000}
 ```
+
+#### Lista de opciones Disponibles
+
+| No. | Opción | Descripción |
+| -- | -- | -- |
+|	1	|	    "num_keep": 5	|	Especifica cuántas de las predicciones más probables se mantienen después de la selección.	|
+|	2	|	    "seed": 42	|	 Semilla utilizada para la generación de números aleatorios, garantizando la reproducibilidad de los resultados.	|
+|	3	|	    "num_predict": 100	|	 Número de tokens que se generarán en la salida.	|
+|	4	|	    "top_k": 20	|	 Controla la cantidad de tokens considerados para cada paso de generación, limitando la selección a los top-k tokens más probables.	|
+|	5	|	    "top_p": 0.9	|	 Controla la cantidad acumulada de probabilidad de tokens considerados para cada paso de generación, limitando la selección a tokens cuya probabilidad acumulada sea mayor que top-p.	|
+|	6	|	    "tfs_z": 0.5	|	 Factor de suavizado utilizado en la función de temperatura para evitar la explosión del gradiente.	|
+|	7	|	    "typical_p": 0.7	|	 Probabilidad típica de los tokens generados, utilizada en la inicialización de la probabilidad de selección de tokens.	|
+|	8	|	    "repeat_last_n": 33	|	 Número de tokens anteriores a considerar al penalizar la repetición de tokens.	|
+|	9	|	    "temperature": 0.8	|	 Parámetro que controla la aleatoriedad de las predicciones durante la generación.	|
+|	10	|	    "repeat_penalty": 1.2	| Penalización aplicada a la repetición de tokens.
+|	11	|	    "presence_penalty": 1.5	| Penalización aplicada a tokens que aparecen con frecuencia en la historia del contexto.	|
+|	12	|	    "frequency_penalty": 1.0	| Penalización aplicada a tokens basada en su frecuencia de aparición.	|
+|	13	|	    "mirostat": 1	| Parámetro para habilitar la función de penalización de tokens.	|
+|	14	|	    "mirostat_tau": 0.8	|	 Factor de suavizado utilizado en la penalización de tokens.	|
+|	15	|	    "mirostat_eta": 0.6	|	 Factor de control de la magnitud de la penalización de tokens.	|
+| 16	|	    "penalize_newline": true	|	 Indica si se debe penalizar la generación de saltos de línea.	|
+| 17	|	    "stop": ["\n", "user:"]	 Lista de tokens que, al ser generados, marcan el final de la generación.	|
+|	18	|	    "numa": false	|	 Habilita o deshabilita la asignación de memoria no uniforme.	|
+|	19	|	    "num_ctx": 1024	|	 Número máximo de tokens en el contexto de entrada.	|
+|	20	|	    "num_batch": 2	|	 Tamaño del lote de datos utilizado para la generación.	|
+|	21	|	    "num_gqa": 1	|	 Número de preguntas de acceso a gráficos permitidas.	|
+|	22	|	    "num_gpu": 1	|	 Número de unidades de procesamiento gráfico utilizadas para la generación.	|
+|	23	|	    "main_gpu": 0	|	 Índice de la GPU principal utilizada para la generación.	|
+|	24	|	    "low_vram": false	|	 Indica si se debe utilizar el modo de bajo consumo de memoria VRAM.	|
+|	25	|	    "f16_kv": true	| Habilita o deshabilita la conversión de tipo de datos a 16 bits para claves y valores.	|
+|	26	|	    "vocab_only": false	|	 Indica si solo se deben considerar tokens del vocabulario.	|
+|	27	|	    "use_mmap": true	|	 Indica si se debe utilizar la asignación de archivos en memoria.	|
+|	28	|	    "use_mlock": false	|	 Indica si se debe bloquear la memoria asignada.	|
+|	29	|	    "rope_frequency_base": 1.1	|	 Base de la frecuencia de la cuerda utilizada en la penalización de la repetición de tokens.	|
+|	30	|	    "rope_frequency_scale": 0.8	|	 Escala de la frecuencia de la cuerda utilizada en la penalización de la repetición de tokens.	|
+|	31	|	    "num_thread": 8	|	 Número de hilos de CPU utilizados para la generación.	|
+
