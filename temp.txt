@@ -1,15 +1,26 @@
-curl http://localhost:11434/api/generate -d '{
+curl http://localhost:11434/api/chat -d '{
   "model": "gemma:2b",
-  "prompt": "Explica por qué el cielo es azúl, en una frase",
-  "options": {
-    "seed": 123,
-    "temperature": 0
-  },
-  "stream":false
-}'
-
-curl http://localhost:11434/api/generate -d '{
-  "model": "gemma:2b",
-  "prompt": "Explica por qué el cielo es azúl, en una frase",
+  "messages": [
+    {
+      "role": "user",
+      "content": "2 + 2"
+    },
+    {
+      "role": "assistant",
+      "content": "the answer is four"
+    },
+    {
+      "role": "user",
+      "content": "3 * 3"
+    },
+    {
+      "role": "assistant",
+      "content": "the answer is nine"
+    },
+    {
+      "role": "user",
+      "content": "10 / 2"
+    }
+  ],
   "stream":false
 }'

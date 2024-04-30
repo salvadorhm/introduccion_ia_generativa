@@ -371,7 +371,7 @@ Ejemplo de salida
 #### Parámetros que contiene la entrada
 
 - **model:** (obligatorio) el nombre del modelo.
-- **message:** los mensajes del chat, esto puede ser utilizado para mantener una memoria del chat.
+- **messages:** los mensajes del chat, esto puede ser utilizado para mantener una memoria del chat.
 
 El objeto de mensaje tiene los siguientes campos:
 
@@ -385,6 +385,45 @@ Parámetros avanzados (opcional):
 - **options:** parámetros adicionales del modelo listados en la [documentación](https://github.com/ollama/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values) para el archivo de modelo, como temperatura.
 - **stream:** si es falso, la respuesta se devolverá como un único objeto de respuesta, en lugar de un flujo de objetos.
 - **keep_alive:** controla cuánto tiempo el modelo permanecerá cargado en la memoria después de la solicitud (por defecto: 5 minutos).
+
+
+### Enviar una entrada con historial en modo Chat
+
+```shell
+curl http://localhost:11434/api/chat -d '{
+  "model": "gemma:2b",
+  "messages": [
+    {
+      "role": "user",
+      "content": "2 + 2"
+    },
+    {
+      "role": "assistant",
+      "content": "the answer is 4"
+    },
+    {
+      "role": "user",
+      "content": "3 * 3"
+    },
+    {
+      "role": "assistant",
+      "content": "the answer is 9"
+    },
+    {
+      "role": "user",
+      "content": "10 / 2"
+    }
+  ],
+  "stream":false
+}'
+```
+
+De esta forma es posible generar un historial con las respuestas para complementar las salidas que se van a obtener, otro uso es el de indicar el formado de salida que se espera
+
+```json
+{"model":"gemma:2b","created_at":"2024-04-30T17:48:43.61142888Z","message":{"role":"assistant","content":"The answer is 5\nThe answer is the result of dividing 10 by 2."},"done":true,"total_duration":1115917931,"load_duration":876100,"prompt_eval_duration":41514000,"eval_count":21,"eval_duration":853008000}
+```
+
 
 ### 6.7 Mediante consulta de la API REST con [curl](https://curl.se) enviando una imagen en codificada [Base64](https://developer.mozilla.org/es/docs/Glossary/Base64)
 
