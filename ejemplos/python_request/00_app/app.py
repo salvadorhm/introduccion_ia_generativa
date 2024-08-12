@@ -1,7 +1,7 @@
 """
 curl http://localhost:11434/api/generate -d '{
   "model": "gemma:2b",
-  "prompt":"¿porqué el cielo es azúl?",
+  "prompt":"¿por qué el cielo es de color azúl?",
   "stream":false
 }'
 """

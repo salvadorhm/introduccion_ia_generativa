@@ -1,5 +1,7 @@
 # Ejemplos usando Python
 
+Ejemplos para realizar aplicaciones con Python3 que realicen solicitudes a la API REST de ollama.
+
 | No | Ejemplo | Descripción |
 | -- | -- | -- |
 | 1 | 00_app | Solicitud básica al servidor |

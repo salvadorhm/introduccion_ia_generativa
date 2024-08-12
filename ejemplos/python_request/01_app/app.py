@@ -4,7 +4,7 @@ curl http://localhost:11434/api/chat -d '{
   "messages": [
     { 
         "role": "user", 
-        "content": "¿porqué el cielo es azúl?" 
+        "content": "¿por qué el cielo es de color azúl?" 
     }
   ],
   "stream":false
@@ -19,7 +19,7 @@ data = {
     "messages": [
         { 
             "role": "user", 
-            "content": "¿porqué el cielo es azúl?" 
+            "content": "¿por qué el cielo es de color azúl?" 
         }
     ],
     "stream":False
