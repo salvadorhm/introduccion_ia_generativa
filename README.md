@@ -14,3 +14,5 @@ La inteligencia artificial generativa se refiere a un conjunto de técnicas que 
 4. **Comunidad**: Fomentar la colaboración y el intercambio de conocimientos entre desarrolladores, investigadores y entusiastas de la IA.
 
 Este repositorio está pensado tanto para principiantes que quieran adentrarse en el mundo de los LLM.
+
+En la sección **Wiki** hay documentación, cursos y herramientas útiles para comenzar en esta aventura.
