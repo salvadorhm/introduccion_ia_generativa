@@ -15,4 +15,4 @@ La inteligencia artificial generativa se refiere a un conjunto de técnicas que 
 
 Este repositorio está pensado tanto para principiantes que quieran adentrarse en el mundo de los LLM.
 
-En la sección **Wiki** hay documentación, cursos y herramientas útiles para comenzar en esta aventura.
+En la sección **[Wiki](https://github.com/salvadorhm/introduccion_ia_generativa/wiki)** hay documentación, cursos y herramientas útiles para comenzar en esta aventura.
