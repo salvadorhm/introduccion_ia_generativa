@@ -8,9 +8,9 @@ La inteligencia artificial generativa se refiere a un conjunto de técnicas que 
 
 ## 2. Objetivos del Repositorio
 
-	•	*Documentación*: Proveer guías y tutoriales  sobre cómo implementar y utilizar modelos de IA generativa, con un enfoque en LLM.
-	•	*Recursos*: Reunir herramientas y bibliotecas que faciliten el desarrollo y la experimentación con IA generativa.
-	•	*Ejemplos Prácticos*: Incluir ejemplos de código que demuestren aplicaciones concretas de LLM.
-	•	*Comunidad*: Fomentar la colaboración y el intercambio de conocimientos entre desarrolladores, investigadores y entusiastas de la IA.
+1. **Documentación**: Proveer guías y tutoriales  sobre cómo implementar y utilizar modelos de IA generativa, con un enfoque en LLM.
+2. **Recursos**: Reunir herramientas y bibliotecas que faciliten el desarrollo y la experimentación con IA generativa.
+3. **Ejemplos Prácticos**: Incluir ejemplos de código que demuestren aplicaciones concretas de LLM.
+4. **Comunidad**: Fomentar la colaboración y el intercambio de conocimientos entre desarrolladores, investigadores y entusiastas de la IA.
 
 Este repositorio está pensado tanto para principiantes que quieran adentrarse en el mundo de los LLM.
